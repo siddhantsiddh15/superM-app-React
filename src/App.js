@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./Navbar.js";
 import Home from "./Home.js";
@@ -6,8 +6,10 @@ import About from "./About.js";
 import Products from "./Products.js";
 import ProductDetails from "./ProductDetails.js";
 import Cart from "./Cart.js";
+import {useState, useEffect} from 'react';
 
 function App() {
+
   const [cart, setCart] = useState(function () {
     let savedCart = [];
     try {
@@ -57,7 +59,6 @@ function App() {
       ]);
     }
   }
-
   return (
     <BrowserRouter>
       <Navbar cart={cart} />
@@ -85,6 +86,7 @@ function App() {
         </Switch>
       </div>
     </BrowserRouter>
+    
   );
 }
 
