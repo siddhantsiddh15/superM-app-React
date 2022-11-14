@@ -36,8 +36,8 @@ export default function Cart({ cart }) {
         .redirectToCheckout({
           lineItems: cartItems,
           mode: "payment",
-          successUrl: "https://admirable-gecko-2c2512.netlify.app/",
-          cancelUrl: "https://admirable-gecko-2c2512.netlify.app/",
+          successUrl: "https://siddhantsiddh15superm.netlify.app/",
+          cancelUrl: "https://siddhantsiddh15superm.netlify.app/",
           customerEmail: email,
         })
         .then((response) => {
