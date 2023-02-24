@@ -3,14 +3,16 @@ import { loadStripe } from "@stripe/stripe-js";
 import Input from "./Input.js";
 import Button from "./Button.js";
 
-// TODO: Replace with your own publishable key
+
+import {useSelector} from 'react-redux';
+import {cartValueSelector} from './Features/cartSlice'
+
 const stripeLoadedPromise = loadStripe("pk_test_51M0hpaSGAts6H1RFYEOw4lMZvNtmscSfLVqGxjwwoPSKnH78mHrTFZKYP5LHelX39q7V6p0ngyFeuW7JycOELH3B00amBTmNlX");
 
-export default function Cart({ cart }) {
-  const totalPrice = cart.reduce(
-    (total, product) => total + product.price * product.quantity,
-    0
-  );
+export default function Cart() {
+  const cart = useSelector(state => state.cart);
+
+  const totalPrice = useSelector(cartValueSelector);
 
   const [email, setEmail] = useState("");
 
