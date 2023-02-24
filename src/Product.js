@@ -1,12 +1,31 @@
 import { Link } from "react-router-dom";
 import Button from "./Button.js";
 
+// these reducer functions handle the add and delete operations 
+import {useDispatch, useSelector} from 'react-redux';
+import {addProduct,
+  removeProduct} from './Features/cartSlice';
+
 export default function Product(props) {
   const { details } = props;
 
-  const productFromCart = props.cart.find(
+  const dispatch = useDispatch();
+
+  const handleProductAdd = (details) => {
+    dispatch(addProduct(details));
+  }
+
+  const handleProductDelete = (id) => {
+    dispatch(removeProduct(id))
+  }
+
+  const cart = useSelector(state => state.cart);
+
+  const productFromCart = cart.find(
     (product) => product.id === details.id
   );
+
+
   const quantity = productFromCart ? productFromCart.quantity : 0;
 
   return (
@@ -36,14 +55,15 @@ export default function Product(props) {
           {quantity > 0 && (
             <Button
               outline
-              onClick={() => props.onProductDelete(details.id)}
+              onClick={ () => handleProductDelete(details.id)}
               className="product-delete"
             >
               x
             </Button>
           )}
         </div>
-        <Button outline onClick={() => props.onProductAdd(details)}>
+        {/* make sure to pass the handleProductAdd as a callback function */}
+        <Button outline onClick={() => handleProductAdd(details)}>
           ${details.price}
         </Button>
       </div>
